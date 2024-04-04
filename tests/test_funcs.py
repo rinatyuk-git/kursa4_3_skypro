@@ -18,3 +18,11 @@ def test_filtered_fin_info():
     assert filtered_fin_info(cor_inputs) == cor_inputs
     assert filtered_fin_info(empty_inputs) == []
     assert filtered_fin_info(noncor_inputs) == []
+
+
+def test_sorted_fin_info():
+    corr_date = [{"date": "2019-12-08T22:46:21.935582"}, {"date": "2018-07-11T02:26:18.671407"}]
+    assert sorted_fin_info(corr_date) == corr_date
+
+
+
