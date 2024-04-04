@@ -55,3 +55,18 @@ def hidden_card_number(card):
         return f"{card_name} {num[-1][:4]} {num[-1][4:6]}** **** {num[-1][-4:]}" # вывод замаскированного номера карты
 
 # print(hidden_card_number('Visa Classic 2842878893689012'))
+
+
+def get_amount(money):
+    """
+    выводим сумму, включая наименование валюты
+    """
+    return f'{money["operationAmount"]["amount"]} {money["operationAmount"]["currency"]["name"]}' # задаем структуру вывода
+
+# print(get_amount({
+#     "operationAmount": {
+#       "amount": "73778.48",
+#       "currency": {
+#         "name": "руб.",
+#         "code": "RUB"
+#       }}}))
