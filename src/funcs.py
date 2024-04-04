@@ -43,7 +43,7 @@ def changed_date_format(date: str) -> str:
 # print(changed_date_format('2018-07-11T02:26:18.671407'))
 
 
-def hidden_card_number(card):
+def hidden_card_number(card: str) -> str:
     """
     создание маскировки по условию для карт в формате  XXXX XX** **** XXXX, для счета - **XXXX
     """
@@ -57,11 +57,11 @@ def hidden_card_number(card):
 # print(hidden_card_number('Visa Classic 2842878893689012'))
 
 
-def get_amount(money):
+def get_amount(money: str) -> str:
     """
     выводим сумму, включая наименование валюты
     """
-    return f'{money["operationAmount"]["amount"]} {money["operationAmount"]["currency"]["name"]}' # задаем структуру вывода
+    return f'{money["operationAmount"]["amount"]} {money["operationAmount"]["currency"]["name"]}' # задаем структуру вывода суммы
 
 # print(get_amount({
 #     "operationAmount": {
@@ -70,3 +70,29 @@ def get_amount(money):
 #         "name": "руб.",
 #         "code": "RUB"
 #       }}}))
+
+
+def get_main(file, oper_loop=5):
+    """
+    собираем все воедино - функция вывода репорта
+    """
+    c = sorted_fin_info(filtered_fin_info(upload_data(file)))
+    result = []
+
+    for i in c:
+        if oper_loop == 0:
+            break
+        output_data = []
+        output_data.append(" ".join([changed_date_format(i['date']), i['description']]))
+        responder = []
+        if i['description'] != "Открытие вклада":
+            responder.append(hidden_card_number(i['from']))
+            responder.append(' -> ')
+        responder.append(hidden_card_number(i['to']))
+        output_data.append(" ".join(responder))
+        output_data.append(get_amount(i))
+        oper_loop -= 1
+        result.append(output_data)
+    return result
+
+# get_main('operations.json')
