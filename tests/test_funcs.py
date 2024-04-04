@@ -25,4 +25,5 @@ def test_sorted_fin_info():
     assert sorted_fin_info(corr_date) == corr_date
 
 
-
+def test_changed_date_format():
+    assert changed_date_format('2018-07-11T02:26:18.671407') == '11.07.2018'
