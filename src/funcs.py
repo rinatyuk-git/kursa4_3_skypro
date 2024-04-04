@@ -30,3 +30,14 @@ def sorted_fin_info(cleaned_info: list) -> list:
     return sorts_fin_info # выводим полученную сортировку
 
 # print(sorted_fin_info(filtered_fin_info(upload_data('operations.json'))))
+
+
+def changed_date_format(date: str) -> str:
+    """
+    преобразование формата даты из полученной инфо в требуемый формат ДД.ММ.ГГГГ
+    """
+    # return f"{date[8:10]}.{date[5:7]}.{date[:4]}" # выводим требуемый формат
+    good_time = datetime.strptime(date,'%Y-%m-%dT%H:%M:%S.%f')
+    return good_time.strftime('%d.%m.%Y')  # выводим требуемый формат
+
+# print(changed_date_format('2018-07-11T02:26:18.671407'))
