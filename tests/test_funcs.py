@@ -27,3 +27,10 @@ def test_sorted_fin_info():
 
 def test_changed_date_format():
     assert changed_date_format('2018-07-11T02:26:18.671407') == '11.07.2018'
+
+
+def test_hidden_card_number():
+    assert hidden_card_number('Счет 72082042523231456215') == 'Счет **6215'
+    assert hidden_card_number('Visa Platinum 8990922113665229') == 'Visa Platinum 8990 92** **** 5229'
+
+
