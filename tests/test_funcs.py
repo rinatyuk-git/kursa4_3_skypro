@@ -34,3 +34,5 @@ def test_hidden_card_number():
     assert hidden_card_number('Visa Platinum 8990922113665229') == 'Visa Platinum 8990 92** **** 5229'
 
 
+def test_get_amount():
+    assert get_amount({"operationAmount": {"amount": "79931.03","currency": {"name": "руб.","code": "RUB"}}}) == '79931.03 руб.'
