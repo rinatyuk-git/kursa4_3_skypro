@@ -83,16 +83,15 @@ def get_main(file, oper_loop=5):
         if oper_loop == 0:
             break
         output_data = []
-        output_data.append(" ".join([changed_date_format(i['date']), i['description']]))
+        output_data.append(" ".join([changed_date_format(i['date']), i['description']])) # собираем строку вида: Дата Наименование платежа
         responder = []
-        if i['description'] != "Открытие вклада":
-            responder.append(hidden_card_number(i['from']))
-            responder.append(' -> ')
-        responder.append(hidden_card_number(i['to']))
-        output_data.append(" ".join(responder))
-        output_data.append(get_amount(i))
-        oper_loop -= 1
-        result.append(output_data)
-    return result
+        if i['description'] != "Открытие вклада": # проверка наличие фразы: "Открытие вклада"
+            responder.append(hidden_card_number(i['from']) + ' ->') # собираем строку вида: Отправитель платежа ->
+        responder.append(hidden_card_number(i['to'])) # собираем строку вида: Получатель платежа
+        output_data.append(" ".join(responder)) # собираем все строки, содеражащие текст
+        output_data.append(get_amount(i)) # выводим сумму, включая валюту
+        oper_loop -= 1 # задаем счетчик
+        result.append(output_data) # создаем финальный аид репорта
+    return result # выводим репорт
 
 # get_main('operations.json')
