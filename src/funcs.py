@@ -41,3 +41,17 @@ def changed_date_format(date: str) -> str:
     return good_time.strftime('%d.%m.%Y')  # выводим требуемый формат
 
 # print(changed_date_format('2018-07-11T02:26:18.671407'))
+
+
+def hidden_card_number(card):
+    """
+    создание маскировки по условию для карт в формате  XXXX XX** **** XXXX, для счета - **XXXX
+    """
+    num = card.split()  # разбивка строки с данными о платежной системе
+    if num[0] == "Счет": # проверка на наличие слова Счет
+        return f"Счет **{num[-1][-4:]}" # вывод замаскированного номера счета
+    else:
+        card_name = " ".join(num[:-1]) # сборка инфо о карте
+        return f"{card_name} {num[-1][:4]} {num[-1][4:6]}** **** {num[-1][-4:]}" # вывод замаскированного номера карты
+
+# print(hidden_card_number('Visa Classic 2842878893689012'))
