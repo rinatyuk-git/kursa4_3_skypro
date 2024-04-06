@@ -20,7 +20,8 @@ def filtered_fin_info(fin_info: list[dict]) -> list[dict]:
     очищаем и фильтруем полученный словарь
     """
     # задаем параметры для фильтрации
-    cleaned_info = list(filter(lambda n: len(n) and n['state'] == 'EXECUTED', fin_info))
+    cleaned_info = list(filter(lambda n: n.get('state') == 'EXECUTED', fin_info))
+    # cleaned_info = list(filter(lambda n: len(n) and n['state'] == 'EXECUTED', fin_info))
     # выводим полученный результат
     return cleaned_info
 
