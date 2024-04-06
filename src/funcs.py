@@ -72,7 +72,8 @@ def hidden_card_number(card: str) -> str:
 # print(hidden_card_number('Visa Classic 2842878893689012'))
 
 
-def get_amount(money: str) -> str:
+# def get_amount(money: str) -> str:
+def get_amount(money: dict) -> str:
     """
     выводим сумму, включая наименование валюты
     """
@@ -95,12 +96,13 @@ def get_main(file, oper_loop=5):
     # c = sorted_fin_info(filtered_fin_info(upload_data(file)))
     fin_info = upload_data(file)
     filter_fin_info = filtered_fin_info(fin_info)
-    sort_fin_info = sorted_fin_info(filter_fin_info)
+    # sort_fin_info = sorted_fin_info(filter_fin_info)
+    sort_fin_info = sorted_fin_info(filter_fin_info)[:oper_loop]
     result = []
 
     for i in sort_fin_info:
-        if oper_loop == 0:
-            break
+        # if oper_loop == 0:
+        #     break
         output_data = []
         # собираем строку вида: Дата Наименование платежа
         output_data.append(" ".join([changed_date_format(i['date']), i['description']]))
