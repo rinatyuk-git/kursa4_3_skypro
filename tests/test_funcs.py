@@ -35,7 +35,17 @@ def test_hidden_card_number():
 
 
 def test_get_amount():
-    assert get_amount({"operationAmount": {"amount": "79931.03","currency": {"name": "руб.","code": "RUB"}}}) == '79931.03 руб.'
+    assert get_amount(
+        {
+            "operationAmount": {
+                "amount": "79931.03",
+                "currency": {
+                    "name": "руб.",
+                    "code": "RUB"
+                }
+            }
+        }
+    ) == '79931.03 руб.'
 
 
 def test_get_main():
