@@ -76,10 +76,13 @@ def get_main(file, oper_loop=5):
     """
     собираем все воедино - функция вывода репорта
     """
-    c = sorted_fin_info(filtered_fin_info(upload_data(file)))
+    # c = sorted_fin_info(filtered_fin_info(upload_data(file)))
+    fin_info = upload_data(file)
+    filter_fin_info = filtered_fin_info(fin_info)
+    sort_fin_info = sorted_fin_info(filter_fin_info)
     result = []
 
-    for i in c:
+    for i in sort_fin_info:
         if oper_loop == 0:
             break
         output_data = []
